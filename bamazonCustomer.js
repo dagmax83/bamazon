@@ -1,17 +1,36 @@
-DROP DATABASE IF EXISTS bamazonDB;
 
-CREATE DATABASE bamazonDB;
+var mysql = require("mysql");
 
-USE bamazonDB;
+var connection = mysql.createConnection({
+  host: "localhost",
+  port: 3306,
+  user: "root",
+  password: "root",
+  database: "bamazondb"
+});
 
-CREATE TABLE products (
-  item_id INT NOT NULL AUTO_INCREMENT,
-  product_name VARCHAR(45) NULL,
-  department_name VARCHAR(45) NULL,
-  price DECIMAL(10,2) NULL,
-  stock_quantity INT NULL,
-  PRIMARY KEY (id)
-);
+connection.connect(function(err) {
+  if (err) throw err;
+  console.log("connected as id " + connection.threadId);
+  // runQueries();
+  // connection.end();
+});
 
-INSERT INTO products (poduct_name, department_name, price, stock_quantity)
-VALUES ( "apple watch", "tech", 300.00, 30 );
+function afterConnection() {
+  connection.query("SELECT * FROM products", function(err, res) {
+    if (err) throw err;
+    console.log(res);
+    // write forloop
+    for (var i = 0; i < res.length, i++) {
+      console.log(res[i].id)
+    }
+    displayResults(res);
+    connection.end();
+    // console.log ();
+
+    
+  });
+}
+function ubdateProducts(){
+
+}
