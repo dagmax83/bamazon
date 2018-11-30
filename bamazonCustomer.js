@@ -17,20 +17,19 @@ connection.connect(function(err) {
 });
 
 function afterConnection() {
-  connection.query("SELECT * FROM products", function(err, res) {
+  connection.query("SELECT * FROM products ORDER BY item_id", function(err, res) {
     if (err) throw err;
-    console.log(res);
+    // console.log(res);
     // write forloop
-    for (var i = 0; i < res.length, i++) {
-      console.log(res[i].id)
+    for (var i = 0; i < res.length; i++) {
+      console.log(res[i].item_id)
     }
-    displayResults(res);
-    connection.end();
+    // displayResults(res);
+    // connection.end();
     // console.log ();
 
     
   });
 }
-function ubdateProducts(){
 
-}
+
